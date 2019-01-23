@@ -16,11 +16,13 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
+    //`this` would refer to the window object or exerciseA
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    //`this` will reference the window object because we are declaring fly with arrow function
+    //syntax and the window defines the `this` context of that function upon creation
   },
 
   exerciseB() {
@@ -30,11 +32,12 @@ const context = {
     }
     
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    //Because this is not a method on an object or invoked with the new operator `this` defaults to the 
+    //global window object
   },
 
   exerciseC() {
@@ -49,11 +52,12 @@ const context = {
     el.addEventListener('click', car.getInfo);
 
     // What is the value of `this` when a user clicks on our element and car.getInfo() is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    //The event listener the method being executed on `el` which in this moment is acting as an object
+    //because object wrappers allow for variables to act as objects
   },
 
   exerciseD() {
@@ -68,13 +72,14 @@ const context = {
       }
     };
 
-
     // What is the value of `this` when we call dog.getBreed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    //getBreed is assigned the return value of a function. Within that function there is another nested function.
+    //`this` is wrapped inside of the nested function within getBreed so `this` is unable to 
+    //see getBreed and defaults to pointing to the global window object because it can't point to the method or objec that it is within
   },
 
   exerciseE() {
@@ -84,13 +89,12 @@ const context = {
       return this.value;
     };
 
-
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    //I'm not sure about this one
   },
 
   exerciseF() {
@@ -109,11 +113,12 @@ const context = {
     const storm = new Hero('Ororo', 'weather control', true);
 
     // What is the value of `this` when we call storm.identifyHero()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'instance of Hero';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    //storm is an instance on the class Hero so when we call the method on that instance
+    //`this` will refer to the specific instance which has access to all of the same methods as the class
   },
 
   exerciseG() {
@@ -137,11 +142,12 @@ const context = {
 
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    //`this` is nested in a function within a method on the Game class
+    //because `this` is nested in the method the new instance of Monopoly cannot see into the nested function
   },
 
   exerciseH() {
@@ -157,11 +163,12 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'obj';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    //in obj we see two key value pairs. the second pair is assigning the return of a function
+    //as its value which is just `this` which will point to the object it is within.
   },
 
   exerciseI() {  
@@ -180,10 +187,14 @@ const context = {
     }, poets);
 
     // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'poets';
     return result;
 
     // Annotation: 
+    //the `this` value the gets returned on each iteration of poets.map() is poets. 
+    //poets is an argument in this function. By including poets as an argument we are 
+    //specifying that `poets` will be the value of `this` when we execute the callback
+    //function which we do by using the map array prototype method.
     // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
   },
 
@@ -194,11 +205,13 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment.
+    //We are calling a method/function on the `el` element using ES5 syntax. This syntax ensures
+    //that the context does not point to the window but rather the `object` that is calling the method.
+    //in this situation `el` is a variable acting as an object which it can do with object wrappers so that methods can be called on them
   },
 
   exerciseK() {
@@ -208,11 +221,12 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment.
+    //this event listener is a function using arrow syntax. Whenever arrow syntax is used on 
+    //event listeners the default `this` context will be the global window object.
   }
 
 };
