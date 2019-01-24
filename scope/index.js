@@ -29,7 +29,12 @@ const scope = {
 
     // Log D: personC
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'Ben'},
+      { B: 'CardiB'},
+      { C: 'CardiB'},
+      { D: 'Paul'}
+    ];
     return result;
 
     // Annotation:
@@ -46,24 +51,29 @@ const scope = {
         let number = 28;
       }
 
-      // Log A: number
+      // Log A: number 75
 
       function newNumber() {
         number = 64;
 
-        // Log B: number
+        // Log B: number 64
       }
 
       newNumber();
 
-      // Log C: number
+      // Log C: number 64
     }
 
     numberFunction();
 
-    // Log D: number
+    // Log D: number 30
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 75 },
+      { B: 64 },
+      { C: 64 },
+      { D: 30 }
+    ];
     return result;
 
     // Annotation:
@@ -80,24 +90,29 @@ const scope = {
         let greeting = 'Howdy';
       }
 
-      // Log A: greeting
+      // Log A: greeting 'YO'
 
       function newPhrase() {
         greeting = 'Hey';
 
-        // Log B: greeting
+        // Log B: greeting 'Hey'
       }
 
       newPhrase();
 
-      // Log C: greeting
+      // Log C: greeting 'Hey'
     }
 
     greetingFunction();
 
-    // Log D: greeting
+    // Log D: greeting 'Hello'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'Yo'},
+      { B: 'Hey'},
+      { C: 'Hey'},
+      { D: 'Hello'}
+    ];
     return result;
 
     // Annotation:
@@ -114,24 +129,29 @@ const scope = {
         let greeting = 'hello';
       }
 
-      // Log A: greeting
+      // Log A: greeting 'hi'
 
       const newGreeting = ()  => {
         greeting = 'welcome';
 
-        // Log B: greeting
+        // Log B: greeting 'welcome'
       };
 
       newGreeting();
 
-      // Log C: greeting
+      // Log C: greeting 'welcome'
     };
 
     greetingGenerator();
 
-    // Log D: greeting
+    // Log D: greeting 'howdy'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'hi'},
+      { B: 'welcome'},
+      { C: 'welcome'},
+      { D: 'howdy'}
+    ];
     return result;
 
     // Annotation:
@@ -151,19 +171,24 @@ const scope = {
           let name = 'Brittany';
         }
 
-        // Log A: name
+        // Log A: 'Nathaniel'
       }
 
-      // Log B: name
+      // Log B: 'Nathaniel'
     }
 
-    // Log C: name
+    // Log C: 'Brittany'
 
     sayName();
 
-    // Log D: name
+    // Log D: 'Brittany'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { C: 'Brittany'}, 
+      { A: 'Nathaniel'}, 
+      { B: 'Nathaniel'}, 
+      { D: 'Brittany'}
+    ];
     return result;
 
     // Annotation:
@@ -174,31 +199,37 @@ const scope = {
     var dog = 'Spot';
 
     function petDog() {
-      // Log A: dog
+      // Log A: 'Spot'
 
       if (dog === 'Spot') {
         let dog = 'Fluffy';
       }
 
       function rollOver() {
-        // Log B: dog
+        // Log B: 'Spot'
 
         dog = 'Biscuit';
 
-        // Log C: dog
+        // Log C: 'Biscuit'
 
       }
 
       rollOver();
 
-      // Log D: dog
+      // Log D: 'Biscuit'
     }
 
     petDog();
 
-    // Log E: dog
+    // Log E: 'Biscuit'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'Spot'},
+      { B: 'Spot'},
+      { C: 'Biscuit'},
+      { D: 'Biscuit'},
+      { E: 'Biscuit'}
+    ];
     return result;
 
     // Annotation:
@@ -214,21 +245,26 @@ const scope = {
         var fruit = 'mango';
 
         if (fruit) {
-          // Log A: fruit
-          const fruit = 'strawberry';
+          // Log A: ref error because const cannot be hoisted but interpreter knows there will be a new variable declared
+          const fruit = 'strawberry'; //knows this exists but doesn't know what to assign it
         }
 
-        // Log B: fruit
+        // Log B: 'mango'
       }
 
-      // Log C: fruit
+      // Log C: 'mango'
     }
 
     eatFruit();
 
-    // Log D: fruit
+    // Log D: 'apple'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'reference error'}, //related to the temporal dead zone because const on line 249
+      { B: 'mango'},
+      { C: 'mango'},
+      { D: 'apple'}
+    ];
     return result;
 
     // Annotation:
@@ -241,34 +277,40 @@ const scope = {
     const fn1 = function() {
       let num = 4;
 
-      // Log A: num
+      // Log A: num 4
 
       if (num < 5) {
         const num = 9;
 
-        fn2(num);
+        fn2(num); //9, bc it is block scoped
 
         const newNum = num;
 
-        // Log B: newNum
+        // Log B: newNum 9
       }
 
       newNum = num;
 
-      // Log C: newNum
+      // Log C: newNum 4
     };
 
     const fn2 = function(num){
-      // Log D: num
+      // Log D: num 9
 
       num = num + 1;
 
-      // Log E: num
+      // Log E: num 10
     };
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 4 },
+      { D: 9},
+      { E: 10},
+      { B: 9},
+      { C: 4}
+    ];
     return result;
 
     // Annotation:
@@ -280,26 +322,35 @@ const scope = {
 
     function eatSnack() {
       hunger -= 25;
-      // Log A: hunger
+      // Log A: hunger 75 --> 55
       gorgeYourself();
 
       function gorgeYourself() {
         const hunger = 0;
-        // Log B: hunger
+        // Log B: hunger 0, still 0
       }
 
-      // Log C: hunger
+      // Log C: hunger 75 --> 55
     }
 
     eatSnack();
 
     hunger += 5;
-    // Log D: hunger
+    // Log D: hunger 80
 
     eatSnack();
-    // Log E: hunger
+    // Log E: hunger 55
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 75},
+      { B: 0},
+      { C: 75},
+      { D: 80},
+      { A: 55},
+      { B: 0},
+      { C: 55},
+      { E: 55}
+    ];
     return result;
 
     // Annotation:
