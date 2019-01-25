@@ -22,7 +22,7 @@ const context = {
 
     // Annotation:
     //`this` will reference the window object because we are declaring fly with arrow function
-    //syntax and the window defines the `this` context of that function upon creation
+    // syntax and the window defines the `this` context of that function upon creation
   },
 
   exerciseB() {
@@ -36,8 +36,8 @@ const context = {
     return result;
 
     // Annotation:
-    //Because this is not a method on an object or invoked with the new operator `this` defaults to the 
-    //global window object
+    // Because this is not a method on an object or invoked with the new operator `this` defaults to the 
+    // global window object
   },
 
   exerciseC() {
@@ -94,7 +94,8 @@ const context = {
     return result;
 
     // Annotation: 
-    //I'm not sure about this one
+    //`this` will reference the window object because we are declaring fn with an arrow function
+    // syntax and the window defines the `this` context of that function upon creation
   },
 
   exerciseF() {
