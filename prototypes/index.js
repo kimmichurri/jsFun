@@ -21,10 +21,20 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
   orangeKittyNames() {
+    // const orangeKitties = kitties.filter(function(kitten) {
+    //   kitten.color === 'orange';
+    // });
+
+    // orangeKitties;
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.filter(function(kitten) {
+      return kitten.color === 'orange';
+    }).map(function(kitten) {
+      return kitten.name;
+    });
+
     return result;
 
     // Annotation:
@@ -34,7 +44,12 @@ const kittyPrompts = {
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.sort(function(a, b) {
+      return b.age - a.age;
+    });
+
+    // how to write in es6:
+    // const result = kitties.sort((a, b) => b.age - a.age);
     return result;
 
     // Annotation:
@@ -55,7 +70,10 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.map(function(kitten) {
+      kitten.age = kitten.age + 2;
+      return kitten;
+    });
     return result;
   }
 };
@@ -87,7 +105,7 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'PLACE ANSWER HERE'
     return result;
 
     // Annotation:
