@@ -21,10 +21,6 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
   orangeKittyNames() {
-    // const orangeKitties = kitties.filter(function(kitten) {
-    //   kitten.color === 'orange';
-    // });
-
     // orangeKitties;
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
@@ -105,7 +101,16 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'PLACE ANSWER HERE'
+    const result = clubs.reduce(function(acc, individualClub) {
+      individualClub.members.forEach(function(member) {
+        if (!acc[member]) {
+          acc[member] =[individualClub.club]
+        } else {
+          acc[member].push(individualClub.club);
+        };
+      })
+      return acc
+    }, {});
     return result;
 
     // Annotation:
@@ -141,7 +146,11 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map(function(individualMod) {
+      individualMod['studentsPerInstructor'] = individualMod.students /
+      individualMod.instructors;
+      return {mod: individualMod.mod, studentsPerInstructor: individualMod.studentsPerInstructor};
+    });
     return result;
 
     // Annotation:
@@ -176,11 +185,16 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(function(cake) {
+      // cake['flavor'] = cake.cakeFlavor;
+      return {flavor: cake.cakeFlavor, inStock: cake.inStock};
+    });
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // Create a varible to save result
+    // use .filter on the cakes array
   },
 
   onlyInStock() {
@@ -204,7 +218,9 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(function(cake) {
+      return cake.inStock >= 1;
+    });
     return result;
 
     // Annotation:
@@ -215,7 +231,10 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce(function(acc, cake) {
+      acc += cake.inStock;
+      return acc;
+    }, 0);
     return result;
 
     // Annotation:
