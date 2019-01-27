@@ -320,7 +320,16 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation phase: store the labels for the global variable 'fruit' and function 'eatFruit' in global memory
+    // Execution: assign string of 'apple' to global variable and invoke eatFruit on line 310
+    // Creation for eatFruit: store text for function in local execution context
+    // Execution eatFruit: creation and execution of first 'if' block, var fruit is assigned the string 'mango'
+    // Move into nested 'if' block creation phase where label for new variable is stored in local execution context
+    // Execution of nested 'if' block asks to log what 'fruit' is but the interpreter doesn't know what it is yet >>
+    // because it only knows that the label exists, the string of 'strawberry' won't be assigned as a value until the next line
+    // Log B is 'mango' based on the functional scope, it wouldn't be 'strawberry' because that is block scoped in the 'if' block
+    // Log C is 'mango' because it was assigned to the function in the first 'if' block
+    // Now the interpreter has removed eatFruit off of the callStack and console logs Log D which will be 'apple' because that was the string assigned to fruit in the global context
   },
 
   exerciseH() {
