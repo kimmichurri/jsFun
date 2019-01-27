@@ -424,7 +424,7 @@ const scope = {
     // Log A: sandwich ketchup sandwich
 
     const addChipotle = () => {
-      // Log B: toppings undefined (thought it was a reference error first, look into this)
+      // Log B: toppings undefined (thought it was a reference error first, but it is undefined because the interpreter knows that it has been declared but doens't know the value yet)
       var toppings = 'chipotle sauce';
 
       if (toppings === 'chipotle sauce') { 
@@ -454,11 +454,11 @@ const scope = {
 
     const result = [ 
       { A: 'ketchup sandwich' }, 
-      { D: 'gouda'}, 
-      { B: 'undefined'}, 
-      { C: 'not a mediocre sandwich'}, 
-      { E: 'not a mediocre sandwich'}, 
-      { F: 'National Treasure'}
+      { D: 'gouda' }, 
+      { B: undefined }, 
+      { C: 'not a mediocre sandwich' }, 
+      { E: 'not a mediocre sandwich' }, 
+      { F: 'National Treasure' }
     ] ;
     return result;
 
@@ -469,14 +469,14 @@ const scope = {
     // Creation of addCheese: store variable and function labels in local execution context
     // Execution of addCheese: assign string of 'gouda' to cheeseTopping which is funtionally scoped, then Log D will be 'gouda' immediately after assigning the string on line above;
     // Continue with execution, invoke shesTheManReference on line 445, creation of that function stores variable label name then execution assigns it to string of 'National Treasure' >>
-    // The whole function has access to 'amandaBynes' variable because it wasn't assigned with a variable keyword (it might leak out to be access globally bc of ES6 syntax, we'll see)
+    // The whole function has access to 'amandaBynes' variable because it wasn't assigned with a variable keyword (leaks out to be access globally bc of ES6 syntax)
     // addCheese removed from callStack and addChipotle is invoked
     // Creation phase addChipotle: topping label is stored in local execution context global memory
-    // Execution phase: Log B is a reference error because the string of 'chipotle sauce' is not assigned to 'toppings' until the next line, the interpreter doesn't know what it is yet
+    // Execution phase: Log B is a undefined because the string of 'chipotle sauce' is not assigned to 'toppings' until the next line, we haven't defined it in the function yet
     // Continue execution phase, assign string to variable 'toppings', we move through if block creation and execution, sandwich is assigned in the block to 'not a mediocre sandwich' and reassigned one function up to global sandwich variable
     // Log C is 'not a mediocre sandwich' because the sandwich variable was not block scoped so it is available to the interpreter outside of that block
     // addChipotle is done, removed from the callStack and Log E is 'not a mediocre sandwich' because 'sandwich' was reassigned globally in the addChipotle function
-    // 
+    // Log F is 'National Treasure' because the interpreter defaults to var and var gets hoisted to the global context
   },
 
   exerciseK() {
@@ -497,7 +497,7 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: the interpreter stores labels 
   },
 
   exerciseL() {
