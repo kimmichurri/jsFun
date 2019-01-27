@@ -277,7 +277,15 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: store variable and function names in global memory
+    // Execution: assign string 'Spot' to global variable, store function text, invoke petDog on line 266
+    // Creation for petDog: store variable label and function label rollOver in local execution context
+    // Exectution for petDog: Log A 'Spot' was assigned globally, creation and execution of 'if' block 'Fluffy' is assigned to variable dog in the block-scope
+    // Next step in execution of petDog is to call rollOver on line 261
+    // Creation of rollOver: if there isn't a keyword is the label 'dog' stored in local execution context?
+    // Execution of rollOver: Log B is still 'Spot' because of the globally assigned variable
+    // Log C is 'Biscuit' because we have functionally assigned dog to 'Biscuit' 
+    // Because the keyword let or const wasn't used in the assignment of this variable the global reassignment is also 'Biscuit' so Logs D and E are 'Biscuit'
   },
 
   exerciseG() {
