@@ -136,7 +136,15 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation phase: store labels greeting and function name in global memory
+    // Execution phase: assign string to global variable and invoke greetingFunction on line 126
+    // Begin creation phase for greetingFunction, store labels for functionally scoped variable and name of newPhrase function
+    // Execute: store string 'Yo' for functionally scoped variable, move into if block creation and execution, greeting is block scoped as 'Howdy'
+    // Log A is 'Yo' because it hasn't been reassigned and we know the value was assigned to 'Yo' in execution
+    // newPhrase is invoked on line 121, creation phase stores the variable label, execution phase assigns string of 'Hey' to greeting, Log B is 'Hey'
+    // since keyword wasn't used to functionally scope variable the variable one function up is also reassigned to 'Hey'
+    // Log C on line 123 is 'Hey' because of the reassignment from newPhrase
+    // Interpreter moves out of functional scope where greeting still has the value of 'Hello'
   },
 
   exerciseD() {
