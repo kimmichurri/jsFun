@@ -262,7 +262,7 @@ const cakePrompts = {
 
   groceryList() {
     // I need to make a grocery list. 
-    //Please give me an object where the keys are
+    // Please give me an object where the keys are
     // each topping, and the values are the 
     //amount of that topping I need to buy e.g.
     // { 
@@ -273,7 +273,16 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce(function(acc, cake) {
+      cake.toppings.forEach(function(topping) {
+        if (!acc.hasOwnProperty(topping)) {
+          acc[topping] = 1;
+        } else {
+          acc[topping]++;
+        }
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
