@@ -183,7 +183,14 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: store greeting label and function name in global memory
+    // Execution: store string value for global variable and then invoke greetingGenerator on line 173
+    // greetingGenerator creation: store labels for greeting and newGreeting function
+    // begin local execution context for greetingGenerator, run creation and execution on if block, greeting is assigned 'hello' in the block scope
+    // Log A greeting will still be 'hi' from function scope bc the variable has not been reassigned
+    // newGreeting is now executed, 'greeting' assign to 'welcome and is reassigned to 'welcome' in the functional scope because it is not preceded by 'let' or 'const'
+    // Log B is 'welcome' due to functional scope and Log C is 'welcome' due to reassgined of variable one function up
+    // Log D greeting is 'howdy' because that is the assignment of the greeting variable in local context and it has not been reassigned
   },
 
   exerciseE() {
