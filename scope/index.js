@@ -38,7 +38,20 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In the creation phase our interpreter grabs labels for the global vars and for 'changePerson' function, ignores function call
+    // In the execution phase our interpreter grabs values for global vars and the text for 'changePerson'
+    // The creation begins for 'changePerson', label is grabbed for 'beautifyPerson'
+    // Creation phase for 'if' block, nothing to see there execept label for 'person' I think
+    // Execute 'if' block, 'person' is assigned to 'CardiB'
+    // 'beautifyPerson' is called and creation phase of that function begins, nothing to see there
+    // Execute 'beautifyPerson', Log A is 'Ben' based on global variables
+    // Creation phase 'if' block
+    // Execute 'if' block 'personB' is assigned to 'CardiB' based on looking one function up, and 'personC' is assigned to 'CardiB' based on logic reassignment in following line
+    // Based on about, Log B must be CardiB
+    // Finish executing 'changePerson' on line 23 and 'personC' 'Tom' is reassigned to Paul
+    // Log C is also CardiB due to reassginment
+    // Now we are out of the function execution of 'changePerson' and we console log D which is 'person C' which was reassigned to 'Paul' on line 23
+
   },
 
   exerciseB() {
