@@ -318,7 +318,7 @@ const classPrompts = {
     // ]
 
     const result = classrooms.filter(function(classroom) {
-      return classroom.program ==='FE';
+      return classroom.program === 'FE' ;
     });
     return result;
 
@@ -334,17 +334,37 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce(function(acc, classroom) {
+      if (classroom.program === 'FE') {
+        acc['feCapacity'] += classroom.capacity;
+      } else {
+        acc['beCapacity'] += classroom.capacity;
+      }
+      return acc;
+    }, {feCapacity: 0, beCapacity: 0});
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // In progress attempt:
+    
+  //   classrooms.reduce(function(accu, classroom) {
+  //     Object.keys(classroom.capacity).forEach(function(key) {
+  //         if (classroom.program === 'FE') {
+              
+  //         }
+  //     })
+  // }, {});
+
+
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort(function(a, b) {
+      return a.capacity - b.capacity;
+    });
     return result;
 
     // Annotation:
