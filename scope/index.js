@@ -227,7 +227,16 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // We will log in the order that logs occur, the result will NOT be in alphabetical order
+    // Creation: store labels for variable and function in global memory
+    // Execution: assign value 'Brittany' to global variable, Log C 'Brittany' on line 215 and invoke sayName on line 217
+    // Creation begins for sayName, name label is stored in local execution context
+    // Execution for sayName assigns string of 'Pam' to variable, move into creation and execution for 'if' block
+    // name variable is reassingned within sayName to 'Nathaniel' due to ommission of keyword infront of variable
+    // nested 'if' statement is created and executed and 'Brittany' is the assigned to the block-scoped variable
+    // moving past the nested 'if' statement Log A is 'Nathaniel' because within the parent 'if' block name is assigned to 'Nathaniel'
+    // Log B is also 'Nathaniel' because the functionally scoped variable was reassinged to 'Nathaniel' (see line 235)
+    // sayName is removed from the callStack and we are left with Log D which is 'Brittany' because name was assigned 'Brittany' in the global scope and never reassigned in the global scope
   },
 
   exerciseF() {
