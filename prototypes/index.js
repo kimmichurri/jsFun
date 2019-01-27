@@ -246,7 +246,14 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce(function(acc, cake) {
+      cake.toppings.forEach(function(topping) {
+        if (acc.indexOf(topping) === -1) {
+          acc.push(topping);
+        };
+      });
+      return acc;
+   }, []);
     return result;
 
     // Annotation:
@@ -351,7 +358,8 @@ const classPrompts = {
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
   getBeerCount() {
-    // Return the total beer count of all beers for every brewery e.g.
+    // Return the total beer count of all beers 
+    //for every brewery e.g.
     // 40
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
@@ -362,7 +370,8 @@ const breweryPrompts = {
   },
 
   getBreweryBeerCount() {
-    // Return an array of objects where each object has the name of a brewery
+    // Return an array of objects where each 
+    // object has the name of a brewery
     // and the count of the beers that brewery has e.g.
     // [
     //  { name: 'Little Machine Brew', beerCount: 12 },
@@ -378,7 +387,8 @@ const breweryPrompts = {
   },
 
   findHighestAbvBeer() {
-    // Return the beer which has the highest ABV of all beers
+    // Return the beer which has the highest ABV 
+    //of all beers
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
