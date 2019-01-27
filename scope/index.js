@@ -421,22 +421,22 @@ const scope = {
   exerciseJ() {
     let sandwich = 'ketchup sandwich';
 
-    // Log A: sandwich
+    // Log A: sandwich ketchup sandwich
 
     const addChipotle = () => {
-      // Log B: toppings
+      // Log B: toppings undefined (thought it was a reference error first, look into this)
       var toppings = 'chipotle sauce';
 
       if (toppings === 'chipotle sauce') { 
         sandwich = 'not a mediocre sandwich';
       }
 
-      // Log C: sandwich
+      // Log C: sandwich 'not a mediocre sandwich'
     };
 
     const addCheese = () => {
       let cheeseTopping = 'gouda';
-      // Log D: cheeseTopping
+      // Log D: cheeseTopping gouda
 
       const shesTheManReference = () => {
         amandaBynes = 'National Treasure';
@@ -449,14 +449,34 @@ const scope = {
     addCheese();
 
     addChipotle();
-    // Log E: sandwich
-    // Log F: amandaBynes
+    // Log E: sandwich 'ketchup sandwich'
+    // Log F: amandaBynes 'National Treasure'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [ 
+      { A: 'ketchup sandwich' }, 
+      { D: 'gouda'}, 
+      { B: 'undefined'}, 
+      { C: 'not a mediocre sandwich'}, 
+      { E: 'not a mediocre sandwich'}, 
+      { F: 'National Treasure'}
+    ] ;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation phase: the interpreter will store the labels for sandwhich, addChipotle, addCheesem and cheeseTopping(?) in global memory
+    // Execution: string of 'ketchup sandwich' will be assigned to 'sandwich' and Log A will be 'ketchup sandwhich' 
+    // string of 'kraft' is assigned to cheeseTopping, addCheese is invoked on line 449
+    // Creation of addCheese: store variable and function labels in local execution context
+    // Execution of addCheese: assign string of 'gouda' to cheeseTopping which is funtionally scoped, then Log D will be 'gouda' immediately after assigning the string on line above;
+    // Continue with execution, invoke shesTheManReference on line 445, creation of that function stores variable label name then execution assigns it to string of 'National Treasure' >>
+    // The whole function has access to 'amandaBynes' variable because it wasn't assigned with a variable keyword (it might leak out to be access globally bc of ES6 syntax, we'll see)
+    // addCheese removed from callStack and addChipotle is invoked
+    // Creation phase addChipotle: topping label is stored in local execution context global memory
+    // Execution phase: Log B is a reference error because the string of 'chipotle sauce' is not assigned to 'toppings' until the next line, the interpreter doesn't know what it is yet
+    // Continue execution phase, assign string to variable 'toppings', we move through if block creation and execution, sandwich is assigned in the block to 'not a mediocre sandwich' and reassigned one function up to global sandwich variable
+    // Log C is 'not a mediocre sandwich' because the sandwich variable was not block scoped so it is available to the interpreter outside of that block
+    // addChipotle is done, removed from the callStack and Log E is 'not a mediocre sandwich' because 'sandwich' was reassigned globally in the addChipotle function
+    // 
   },
 
   exerciseK() {
