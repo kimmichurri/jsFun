@@ -90,7 +90,14 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation phase: grab names for global vars and 'numberFunction', ignore function invocation
+    // Execution phase: grab value '75' of global var and call 'numberFunction' on line 75
+    // Creation phase for numberFunction: store label for functionally scoped variable and name of newNumber function
+    // Execution phase for numberFunction: store value '75' for let, create and execute 'if' block, number assigned to '28' only within the block b/c of use of 'let'
+    // Log A is 75 based on function scope of variable
+    // Call newNumber on 75, create and execute newNumber, number variable is assigned value of 64 (and reassigned in functional scope because let wasn't placed in front) so Log B is 64
+    // Move on to LogC since newNumber has already been called and removed from CallStack, number is now 64
+    // Log D is 30 because the 'global' variable was never reassigned
   },
 
   exerciseC() {
