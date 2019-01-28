@@ -486,22 +486,29 @@ const scope = {
       if (num > 5) {
         num = 7;
       }
-      // Log A: num
+      // Log A: num 7
     }
 
     foo();
 
-    // Log B: num
+    // Log B: num 7
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 7},
+      { B: 7}
+    ];
     return result;
 
     // Annotation:
-    // Creation: the interpreter stores labels 
+    // Creation: the interpreter stores labels and function name
+    // Execution: num variable is assigned value of 10 and then foo is invoked on line 492
+    // Create and execute foo: create and execute 'if' block: num within function is assigned to 7 so Log A is 7
+    // foo is now removed from callStack
+    // Log B is also 7 because num is reassgined on line 487 because the variable was not declared with a keyword
   },
 
   exerciseL() {
-    let grade = 100;
+    let grade = 100; //gets reassigned to 90 in losePoints
 
     function losePoints() {
       grade = 90;
@@ -513,49 +520,74 @@ const scope = {
           let grade = 97;
         }
 
-        // Log A: grade
+        // Log A: grade 95
       }
 
       addPoints();
 
-      // Log B: grade
+      // Log B: grade '90'
     }
 
     losePoints();
 
-    // Log C: grade
+    // Log C: grade 90
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 95 },
+      { B: 90},
+      { C: 90 }
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: store labels of variable and function name in global memory
+    // Execution: assign value to global variable '100' and invoke losePoints
+    // Creation for losePoints: variable label and function label are stored in global memory of local execution context
+    // Execution: grade is assigned '90' functionally and also reassigned globally and addPoints is invoked
+    // Create and execute addPoints, create grabs label of variable, execute assigns 95 to grade and runs through 'if' block
+    // 'if' statement evaluates to true and grade is block-scoped to be 97 because of 'let' keyword
+    // Log A is 95 because grade is assigned to '95' functionally
+    // addPoints is removed from callStack
+    // Log B is executed and will be 90 because grade is assigned to 90 in the functional scope
+    // losePoints is removed from callStack
+    // Log C is 90 because it was reassigned globally in losePoints function
   },
 
   exerciseM() {
-    var num = 5;
+    var num = 5; //gets reassigned to 6 in 'first' function
 
     function first() {
-      // Log A: num
+      // Log A: num 5
       num = 6;
-      // Log B: num
+      // Log B: num 6
     }
 
     function second() {
-      // Log C: num
+      // Log C: num reference error
       let num = 7;
     }
 
     first();
     second();
 
-    // Log D: num
+    // Log D: num 6
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 5 },
+      { B: 6 },
+      { C: 'reference error' },
+      { D: 6 }
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: store variable label and labels of both functions
+    // Execution: add value to variable and then invoke 'first' function
+    // Create 'first': the interpreter stores the label of the variable and defaults to var
+    // Execute 'first': Log A is 5 because the interpreter is referring to the globally scoped variable, number variable is functionally scoped to 6 and globally reassigned to 6 so Log B is 6
+    // 'first' is removed from callStack and 'second' is invoked
+    // 'second' creation phase stores the variable label
+    // 'second' execution Log C asks for num which is now globally reassigned to 6, and num is assigned to 7 functionally in 'second'
   },
 
   exerciseN() {
@@ -601,15 +633,19 @@ const scope = {
     var shoe = 'flipflop';
 
     function putOnShoe() {
-      // Log A: shoe
-      var shoe = 'boot';
+      // Log A: shoe undefined because it knows the variable label is there but doesn't know what it is yet
+      var shoe = 'boot'; //since this is var it is hoisted to the top of this specific function so the interpreter know this label exists, just doesn't know what value is assigned to it yet
     }
 
-    // Log B: shoe
+    // Log B: shoe flipflop
     putOnShoe();
-    // Log C: shoe
+    // Log C: shoe flipflop
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { B: 'flipflop'},
+      { A: undefined },
+      { C: 'flipflop'}
+    ];
     return result;
 
     // Annotation:
@@ -620,7 +656,7 @@ const scope = {
     let lunch;
     function orderLunch() {
       if (lunch) {
-        // Log A: lunch
+        // Log A: lunch undefined
         let lunch = 'sandwich';
       }
 
@@ -628,12 +664,12 @@ const scope = {
         lunch = 'soup';
       }
 
-      // Log B: lunch
+      // Log B: lunch 'soup'
     }
 
     orderLunch();
 
-    // Log C: lunch
+    // Log C: lunch 'soup' gets reassigned globally after second if statement
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
@@ -647,13 +683,13 @@ const scope = {
     let wildKids = ['Antigone'];
 
     let myCrazyKidAntics = kid => {
-      // Log A: kid
+      // Log A: kid 'Pandora' because you pass in an argument
       wildKids.push(kid);
-      // Log B: wildKids
+      // Log B: wildKids ['Antigone', 'Pandora']
   
       let drawOnTheWall = () => {
         let myKid = 'Mandy';
-        // Log C: myKid
+        // Log C: myKid 'Mandy'
         return `That wild kid ${myKid}, drew on the wall!`;
       };
 
@@ -661,18 +697,24 @@ const scope = {
 
       let myAmazingKid = () => {
         let myKid = wildKids.shift();
-        // Log D: myKid
+        // Log D: myKid ['Antigone] this was shifted out
         return `That kid ${myKid}, is AMAZING!`;
       };
 
       myAmazingKid();
-      // Log E: myKid;
+      // Log E: myKid; 
       return `All these kids are wild, especially, ${myKid}!`;
     };
 
     myCrazyKidAntics(myKid);
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'Pandora' },
+      { B: ['Antigone', 'Pandora'] },
+      { C: 'Mandy'},
+      { D: 'Antigone'},
+      { E: 'Pandora'}
+    ];
     return result;
 
     // Annotation:
@@ -681,15 +723,15 @@ const scope = {
 
   exerciseR() {
     let myName = 'Rody';
-    // Log A: myName
+    // Log A: myName 'Rody' get reassinged after innerFunc to 'RodyToyDaniels'
 
     const parentFunc = () => {
       myName += 'Toy';
-      // Log B: myName
+      // Log B: myName 'RodyToy' then 'RodyToyDaniels' based on innerFunc
 
       let innerFunc = () => {
         let myName = 'Tesla'; 
-        // Log C: myName
+        // Log C: myName 'Tesla'
       };
 
       innerFunc();
@@ -697,7 +739,7 @@ const scope = {
     };
 
     parentFunc();
-    // Log D: myName
+    // Log D: myName 'RodyToyDaniels'
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
