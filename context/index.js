@@ -8,7 +8,7 @@ const context = {
       constructor(title, classification) {
         this.title = title;
         this.classification = classification;
-        this.fly = fly;
+        this.fly = fly; //reference to fly function
       } 
     }
 
@@ -21,7 +21,8 @@ const context = {
     return result;
 
     // Annotation:
-    //`this` will reference the window object because we are declaring fly with arrow function
+    // the arrow function on line 3 binds `this` to the global window object upon creation because of the ES6 syntax
+    // `this` will reference the window object because we are declaring fly with arrow function
     // syntax and the window defines the `this` context of that function upon creation
   },
 
@@ -36,14 +37,13 @@ const context = {
     return result;
 
     // Annotation:
-    // Because this is not a method on an object or invoked with the new operator `this` defaults to the 
-    // global window object
+    // Because this is not a method on an object or invoked with the new keyword `this` defaults to the global window object
   },
 
   exerciseC() {
     const car = {
       make: 'Tesla',
-      getInfo: function(){
+      getInfo: function() {
         console.log(this);
       }
     };
@@ -56,8 +56,8 @@ const context = {
     return result;
 
     // Annotation: 
-    //The event listener the method being executed on `el` which in this moment is acting as an object
-    //because object wrappers allow for variables to act as objects
+    // The event listener is a method being executed on `el` which in this moment is acting as an object
+    // Because object wrappers allow for variables to act as objects this is bound to the object 'el', it is being called on this 'object'
   },
 
   exerciseD() {
@@ -77,9 +77,10 @@ const context = {
     return result;
 
     // Annotation: 
-    //getBreed is assigned the return value of a function. Within that function there is another nested function.
-    //`this` is wrapped inside of the nested function within getBreed so `this` is unable to 
-    //see getBreed and defaults to pointing to the global window object because it can't point to the method or objec that it is within
+    // getBreed is assigned the return value of a function. Within that function there is a nested function
+    // this is being logged within a nested function so it does not have access to the dog object and defaults to the global window object
+    // `this` is wrapped inside of the nested function within getBreed so `this` is unable to 
+    // see getBreed and defaults to pointing to the global window object because it can't point to the method or objec that it is within
   },
 
   exerciseE() {
@@ -94,7 +95,7 @@ const context = {
     return result;
 
     // Annotation: 
-    //`this` will reference the window object because we are declaring fn with an arrow function
+    // `this` will reference the window object because we are declaring fn with an arrow function
     // syntax and the window defines the `this` context of that function upon creation
   },
 
@@ -118,8 +119,8 @@ const context = {
     return result;
 
     // Annotation: 
-    //storm is an instance on the class Hero so when we call the method on that instance
-    //`this` will refer to the specific instance which has access to all of the same methods as the class
+    // storm is an instance on the class Hero so when we call the method on that instance
+    // `this` will refer to the specific instance which has access to all of the same methods as the class
   },
 
   exerciseG() {
@@ -147,8 +148,8 @@ const context = {
     return result;
 
     // Annotation: 
-    //`this` is nested in a function within a method on the Game class
-    //because `this` is nested in the method the new instance of Monopoly cannot see into the nested function
+    // `this` is nested in a function within a method on the Game class, because it is nested it cannot point to the object
+    // because `this` is nested in the method the new instance of Monopoly cannot see into the nested function
   },
 
   exerciseH() {
@@ -168,8 +169,8 @@ const context = {
     return result;
 
     // Annotation: 
-    //in obj we see two key value pairs. the second pair is assigning the return of a function
-    //as its value which is just `this` which will point to the object it is within.
+    // in obj we see two key value pairs. the second pair is assigning the return of a function
+    // as its value which is just `this` which will point to the object it is within BECAUSE of the ES6 arrow function syntax
   },
 
   exerciseI() {  
@@ -192,11 +193,10 @@ const context = {
     return result;
 
     // Annotation: 
-    //the `this` value the gets returned on each iteration of poets.map() is poets. 
-    //poets is an argument in this function. By including poets as an argument we are 
-    //specifying that `poets` will be the value of `this` when we execute the callback
-    //function which we do by using the map array prototype method.
-    // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
+    // the `this` value the gets returned on each iteration of poets.map() is poets
+    // poets is an ARGUMENT in this function. By including poets as an argument we are 
+    // specifying that `poets` will be the value of `this` when we execute the callback
+    // function which we do by using the map array prototype method
   },
 
   exerciseJ() {
@@ -210,9 +210,9 @@ const context = {
     return result;
 
     // Annotation: 
-    //We are calling a method/function on the `el` element using ES5 syntax. This syntax ensures
-    //that the context does not point to the window but rather the `object` that is calling the method.
-    //in this situation `el` is a variable acting as an object which it can do with object wrappers so that methods can be called on them
+    // We are calling a method/function on the `el` element using ES5 syntax. This syntax ensures
+    // that the context does not point to the window but rather the `object` that is calling the method.
+    // in this situation `el` is a variable acting as an object which it can do with object wrappers so that methods can be called on them
   },
 
   exerciseK() {
@@ -226,8 +226,8 @@ const context = {
     return result;
 
     // Annotation: 
-    //this event listener is a function using arrow syntax. Whenever arrow syntax is used on 
-    //event listeners the default `this` context will be the global window object.
+    // this event listener is a function using arrow syntax. Whenever arrow syntax is used on 
+    // event listeners the default `this` context will be the global window object.
   }
 
 };
