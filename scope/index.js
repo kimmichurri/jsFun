@@ -749,7 +749,13 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Execution: myKid and wildKids are assigned values and myCrazyKidAntics is invoked with an argument of myKid
+    // Log A returns Pandora because kid parameter was given an argument of myKid which is globally assigned to 'Pandora'
+    // 'Pandora' gets pushed into the wildKids array, so Log B will return the wildKids array with both 'Antigone' and 'Pandora'
+    // drawOnTheWall is invoked, myKid is assigned value of 'Mandy' in function scope, Log C will reflect that on next line
+    // myAmazingKid is called
+    // myKid is reassigned the value of what is 'shifted' off the wildKids array which is the 0 index 'Antigone' within the function scope, Log D will reflect that
+    // Log E references myKid variable in global scope which is still 'Pandora'
   },
 
   exerciseR() {
