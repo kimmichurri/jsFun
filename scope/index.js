@@ -587,7 +587,7 @@ const scope = {
     // Execute 'first': Log A is 5 because the interpreter is referring to the globally scoped variable, number variable is functionally scoped to 6 and globally reassigned to 6 so Log B is 6
     // 'first' is removed from callStack and 'second' is invoked
     // 'second' creation phase stores the variable label
-    // 'second' execution Log C asks for num which is now globally reassigned to 6, and num is assigned to 7 functionally in 'second'
+    // 'second' execution Log C asks for num which will be reference error
   },
 
   exerciseN() {
@@ -595,7 +595,7 @@ const scope = {
 
     function changeInstructor() {
 
-      // Log A: instructor
+      // Log A: instructor 'Pam'
 
       if (instructor === 'Brittany') {
         const instructor = 'Nathaniel';
@@ -603,30 +603,45 @@ const scope = {
         let instructor = 'Brittany';
       }
 
-      // Log B: instructor
+      // Log B: instructor 'Pam'
 
       function rename() {
         instructor = 'Louisa';
-        // Log C: instructor
+        // Log C: instructor 'Louisa'
       }
 
       rename();
 
-      // Log D: instructor
+      // Log D: instructor 'Louisa'
 
     }
 
-    // Log E: instructor
+    // Log E: instructor 'Pam'
 
     changeInstructor();
 
-    // Log F: instructor
+    // Log F: instructor 'Pam'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { E: 'Pam' },
+      { A: 'Pam'},
+      { B: 'Pam'},
+      { C: 'Louisa'},
+      { D: 'Louisa'},
+      { F: 'Louisa'}
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: store labels for global variable and function name in global memory
+    // Execution: assign string of 'Pam' to global variable, Log E Pam, then invoke changeInstructor
+    // Creation changeInstructor stores rename function name
+    // Execution changeInstructor Log A is still 'Pam'
+    // 'if' block is created and executed resulting in 'Brittany' being block scope assigned to instructor in the else block
+    // Log B is still 'Pam' because the interpreter has access to instructor variable in the global scope
+    // rename is invoked after Log B, Log C is Louisa due to variable assignment within rename function
+    // rename is removed from callStack
+    // Log D instructor is Louisa because instructor was reassigned in global scope in the rename function, and this holds true for Log F as well
   },
 
   exerciseO() {
