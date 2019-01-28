@@ -648,7 +648,7 @@ const scope = {
     var shoe = 'flipflop';
 
     function putOnShoe() {
-      // Log A: shoe undefined because it knows the variable label is there but doesn't know what it is yet
+      // Log A: shoe undefined because it knows the variable label is there but doesn't know what it is yet. 
       var shoe = 'boot'; //since this is var it is hoisted to the top of this specific function so the interpreter know this label exists, just doesn't know what value is assigned to it yet
     }
 
@@ -664,7 +664,12 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Log B is the first console log to be executed before putOnShoe is invoked, and it logs the global var 'flipflop'
+    // putOnShoe is invoked, creation of putOnShoe stores the variable name in global memory
+    // Log A asks for shoe. The interpreter knows the shoe exists but won't know the value of that variable until the next line so the console log of shoe variable will return undefined
+    // the variable shoe is assigned the value of 'boot' within the functional scope of putOnShoe
+    // putOnShoe is removed from callStack
+    // Log C will log the value of shoe which is assigned to 'fliflop' in the global scope
   },
 
   exerciseP() {
