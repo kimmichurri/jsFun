@@ -676,7 +676,7 @@ const scope = {
     let lunch;
     function orderLunch() {
       if (lunch) {
-        // Log A: lunch undefined
+        // Log A: lunch will not log because there is not a condition here that could evaluate to true, it just says 'lunch'
         let lunch = 'sandwich';
       }
 
@@ -684,18 +684,29 @@ const scope = {
         lunch = 'soup';
       }
 
-      // Log B: lunch 'soup'
+      // Log B: lunch 'soup' is reassigned globally after second if statement
     }
 
     orderLunch();
 
-    // Log C: lunch 'soup' gets reassigned globally after second if statement
+    // Log C: lunch 'soup' is reassigned globally after second if statement
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { B: 'soup' },
+      { C: 'soup' }
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Creation: lunch variable label and function label are stored in global mem
+    // Execution: lunch variable is not assigned a value in execution so will result in undefined until it is assigned a value
+    // orderLunch is invoked, creation occurs
+    // orderLunch execution Log A will not log because the conditional will not evaluate to 'true' because there is not a condition to be met
+    // second 'if' block is created then executed, since lunch within the global scope is assigned the value underfined the >>
+    // block evaluates to true and lunch is now assigned the value of 'soup' within the block AND the global variable of lunch is also reaassigned to 'soup' because the variable was not declared with a keyword and defaults to var
+    // Log B will access the global variable for lunch which was just reassigned to 'soup'
+    // orderLunch is finished executing and removed from the callStack
+    // Log C is 'soup' because the interpreter is referencing the variable in global scope
   },
 
   exerciseQ(){
@@ -717,12 +728,12 @@ const scope = {
 
       let myAmazingKid = () => {
         let myKid = wildKids.shift();
-        // Log D: myKid ['Antigone] this was shifted out
+        // Log D: myKid ['Antigone'] this was shifted out
         return `That kid ${myKid}, is AMAZING!`;
       };
 
       myAmazingKid();
-      // Log E: myKid; 
+      // Log E: myKid;  'Pandora'
       return `All these kids are wild, especially, ${myKid}!`;
     };
 
@@ -743,7 +754,7 @@ const scope = {
 
   exerciseR() {
     let myName = 'Rody';
-    // Log A: myName 'Rody' get reassinged after innerFunc to 'RodyToyDaniels'
+    // Log A: myName 'Rody', get reassinged after innerFunc to 'RodyToyDaniels'
 
     const parentFunc = () => {
       myName += 'Toy';
@@ -761,7 +772,12 @@ const scope = {
     parentFunc();
     // Log D: myName 'RodyToyDaniels'
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { A: 'Rody' },
+      { B: 'RodyToy' },
+      { C: 'Tesla' },
+      { D: 'RodyToyDaniels' }
+    ];
     return result;
 
     // Annotation:
