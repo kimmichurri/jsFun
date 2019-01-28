@@ -787,7 +787,15 @@ const scope = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Log A in execution returns 'Rody'
+    // parentFunc is invoked, create stores variable label
+    // parentFunc execution assigns myName to 'RodyToy' in function and reassigns is globally, Log B will reflect that
+    // innerFunc is invoked, creation stores variable name in global memory of local execution context
+    // Log C will return myname as 'Tesla' which is functionally scoped
+    // interpreter finishes executing innerFunc, removes from callStack
+    // myName is reassigned to 'RodyToyDaniels' globally on the last line of parentFunc
+    // interpreter finishes executing, parentFunc is removed from callStack
+    // Log D will log the most recent global reassignment of myName which is 'RodyToyDaniels'
   }
 };
 
